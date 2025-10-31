@@ -1,0 +1,31 @@
+Loopbak : process(clk_100)
+begin
+    if rising_edge(clk_100) then
+         ----------------------Reset logic -------------------------------------   
+            if reset = '1' then
+                fifo_data_out_stb       <= '0';
+                fifo_data_in_stb_t      <= '0';  
+     -------------------------------------------------------------------------
+            else
+          -----------Transmit and receive  initialize 
+                fifo_data_out_stb       <= '0';
+                fifo_data_in_stb_t      <= '0';
+                
+---------------Loop back code -----------------------------                
+--                 if fifo_EMPTY = '0' then
+--                     if command_execute = '0' then
+--                         fifo_data_out_stb <= '1';
+--                         command   <= fifo_data_out;
+--                         command_execute <= command_execute xor '1';
+--                     elsif command_execute = '1' then
+--                        if fifo_full_t = '0' then
+--                            fifo_data_in_stb_t <= '1';
+--                            fifo_data_in_t     <= command;
+--                            command_execute <= command_execute xor '1';
+--                        end if;
+--                     end if;
+--                 end if;
+------------------------Loop back code ends -----------------
+             end if;
+    end if;
+end process;    
